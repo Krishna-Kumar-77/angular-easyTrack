@@ -1,0 +1,46 @@
+<app-header />
+
+<main>
+  <!-- <ul id="users">
+    <li>
+      <app-user [user]="users[0]" (select)="onSelectUser($event)" /> -->
+      <!-- $event variable is used to take the input from emit.  -->
+    <!-- </li>
+    <li>
+      <app-user [user]="users[1]" (select)="onSelectUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[2]" (select)="onSelectUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[3]" (select)="onSelectUser($event)" />
+    </li>
+  </ul> -->
+
+  <ul id ="users">
+    @for (user of users; track user.id){
+      <li>
+      <app-user [user]="user" [selected]="user.id === selectedUserId" (select)="onSelectUser($event)" />
+    </li>
+    }  
+    <!-- alternat syntax for this for loop is structural directive. -->
+      <!-- <li *ngFor ="let user of users">
+      <app-user [user]="user" (select)="onSelectUser($event)" />
+    </li> -->
+  </ul>
+  <!-- <app-tasks [name]="selectedUser ? selectedUser.name : ''" />
+   alternate for this case and useful version.
+  -->
+   @if(selectedUser){
+    <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name" />
+   }@else {
+    <p id="fallback"> Select user to see their tasks!</p>
+   }  
+   
+   <!-- for this code alternate of structural directive is -->
+
+   <!-- <app-tasks *ngIf="selectedUser; else fallback" [name] ="selectedUser!.name" />
+   <ng-template #fallback>
+    <p id="fallback"> Select user to see their tasks!</p>
+   </ng-template> -->
+</main>
